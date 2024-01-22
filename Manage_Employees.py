@@ -13,7 +13,7 @@ class Employee_Management:
     def get_alert_employees(self):
        # print(self.server)
        # engine = create_engine(self.server)
-        #conn = engine.connect()
+       #conn = engine.connect()
        # query = 'SELECT * FROM  CMPNY.PRD.TABLE WHERE CMPNY.PRD.TABLE.DEPARTMENT = "manuf" AND CMPNY.PRD.TABLE.ALERT_TOGGLE = True'
        # emp_alert_df = pd.read_sql_query(query, conn)
         emp_alert_df = pd.read_csv('data/emp.csv')
