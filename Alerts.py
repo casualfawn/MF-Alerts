@@ -7,7 +7,7 @@ class Alerts:
         self.server = server
         self.mf_emps = mf_emps
 
-    ## Get Most recent trending data
+
     def query_current_trends(self):
         current_trends = pd.read_csv('data/biordf.csv', names=["pH", "DO", "Temperature", "RPM", "Timestamp"])
         return current_trends
