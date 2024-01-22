@@ -1,14 +1,14 @@
-empid,name,phone,email,department
-123,Amanda Roo,1234567890,temp@email.com,hr
-234,Andrew Cho,1234567890,temp@email.com,hr
-345,Andrew Goldf,1234567890,temp@email.com,manuf
-456,Andy Shiffman,1234567890,temp@email.com,manuf
-567,Anna Frisch,1234567890,temp@email.com,manuf
-678,Ben Rogers,1234567890,temp@email.com,manuf
-789,Ben Conte,1234567890,temp@email.com,manuf
-890,Biola Mac,1234567890,temp@email.com,manuf
-1123,Brian Rue,1234567890,temp@email.com,manuf
-2234,Brianna Olachea,1234567890,temp@email.com,manuf
-3345,Carey Web,1234567890,temp@email.com,manuf
-4456,Cathie Horton,1234567890,temp@email.com,manuf
-5567,Jake Kirkwood,1234567890,temp@email.com,manuf
+empid,name,phone,email,department,alert_toggle,
+123,Amanda Roo,1234567890,temp@email.com,hr,False
+234,Andrew Cho,1234567890,temp@email.com,hr,False
+345,Andrew Goldf,1234567890,temp@email.com,manuf,False
+456,Andy Shiffman,1234567890,temp@email.com,manuf,False
+567,Anna Frisch,1234567890,temp@email.com,manuf,False
+678,Ben Rogers,1234567890,temp@email.com,manuf,True
+789,Ben Conte,1234567890,temp@email.com,manuf,True
+890,Biola Mac,1234567890,temp@email.com,manuf,True
+1123,Brian Rue,1234567890,temp@email.com,manuf,True
+2234,Brianna Olachea,1234567890,temp@email.com,manuf,True
+3345,Carey Web,1234567890,temp@email.com,manuf,True
+4456,Cathie Horton,1234567890,temp@email.com,manuf,True
+5567,Jake Kirkwood,1234567890,temp@email.com,manuf,True
