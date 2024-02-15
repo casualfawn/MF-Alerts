@@ -4,7 +4,6 @@ import sqlalchemy
 from Alerts import Alerts
 from Manage_Employees import Employee_Management
 
-
 if __name__ == '__main__':
 
     # -- Get phones of Employees opted in
