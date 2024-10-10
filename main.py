@@ -7,7 +7,8 @@ from Manage_Employees import Employee_Management
 if __name__ == '__main__':
 
     # -- Get phones of Employees opted in
-    emp_manage = Employee_Management('mpo', 'temp', 'company.server', 3052)
+    emp_manage = Employee_Management('MPO192', 'temp', 'company.server', 3052)
+    temp = emp_manage.set_password('mp123')
     empdf = emp_manage.get_alert_employees()
     alertlist = emp_manage.get_alert_phonenums(empdf)
 

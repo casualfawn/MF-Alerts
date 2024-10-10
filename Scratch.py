@@ -1,6 +1,18 @@
 id_query = 'SELECT EMPID from CMPNY.PRD.TABLE'
 new_emps_query = 'SELECT * FROM  CMPNY.PRD.HR where CMPNY.PRD.HR.EMPID not in CMPNY.PRD.TABLE.EMPID'
 
+from hashlib import sha256
+from hashlib import blake2b
+
+def set_password(raw_password):
+    algo = 'sha1'
+    salt = get_hexdigest(algo, str(random.random()), str(random.random()))[:5]
+    hsh = get_hexdigest(algo, salt, raw_password)
+    password = '%s$%s$%s' % (algo, salt, hsh)
+    return password
+
+
+
 def get_ids(query):
     #id_list = getquery id_query
     #return id_list
@@ -59,3 +71,11 @@ def add_new_employee(newemployeedf):
     else:
         df = employees
     return df
+
+
+
+
+
+
+
+for (i in 1:100)

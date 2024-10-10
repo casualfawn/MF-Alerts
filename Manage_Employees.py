@@ -1,22 +1,17 @@
 import pandas as pd
-from sqlalchemy import create_engine
+from Database_Config import BF_Con
+
+con = BF_Con('user1', 'pass1')
+
 class Employee_Management:
 
-    def __init__(self, userid, pwd, server, port):
-        self.userid = userid
-        self.pwd = pwd
-        self.server = server
-        self.port = port
-
+    def __init__(self):
+        self.conn =  con
 
     # Gather Employees Dataframe for Alerts
-    def get_alert_employees(self):
-       # print(self.server)
-       # engine = create_engine(self.server)
-       #conn = engine.connect()
-       # query = 'SELECT * FROM  CMPNY.PRD.TABLE WHERE CMPNY.PRD.TABLE.DEPARTMENT = "manuf" AND CMPNY.PRD.TABLE.ALERT_TOGGLE = True'
-       # emp_alert_df = pd.read_sql_query(query, conn)
-        emp_alert_df = pd.read_csv('data/emp.csv')
+    def get_alert_team(self):
+        query = 'SELECT * FROM  CMPNY.PRD.TABLE WHERE CMPNY.PRD.TABLE.DEPARTMENT = "manuf" AND CMPNY.PRD.TABLE.ALERT_TOGGLE = True'
+        emp_alert_df = pd.read_sql_query(query, conn)
         return emp_alert_df
 
     ## Gather Phone Numbers of Employees Signed Up for Alerts
@@ -40,11 +35,10 @@ class Employee_Management:
     ## Get all Active Employees
     def get_active_employees(self):
             emp_list = list()
-            #rs = con.execute('SELECT FULL_NAME, ALERTS_TOGGLE FROM COMPANY.PRD.EMP where ACTIVE == True and department == "manuf"')
-            empdf = pd.read_csv('data/emp.csv', names=['empid', 'name', 'phone', 'email', 'department', 'alerts_toggle'])
-            empdf = empdf[["name", "department", "phone"]]
-            for row in empdf.items():
-                emp_list.append(row)
-            return emp_list
+            emp = con.execute('SELECT FULL_NAME, ALERTS_TOGGLE FROM COMPANY.PRD.EMP where ACTIVE == True and department == "manuf"')
+            emp_alert_df = pd.read_sql_query(query, conn)
+            return emp_alert_df
 
 
+a = Employee_Management
+a.
