@@ -1,23 +1,37 @@
 import pandas as pd
 import twilio
 import sqlalchemy
-from Alerts import Alerts
-from Manage_Employees import Employee_Management
+from Alerts import AlertSys
+from EmployeeDBManagemenet import EmployeeDBManager
+from TwilioMessageManager import TwilioMessageManager, TwilioMessageSender
 
 if __name__ == '__main__':
 
+    # DB Connection
+    db_conn = engine.connect()
+
     # -- Get phones of Employees opted in
-    emp_manage = Employee_Management('mpo', 'temp', 'company.server', 3052)
-    empdf = emp_manage.get_alert_employees()
-    alertlist = emp_manage.get_alert_phonenums(empdf)
+    emp_manage = EmployeeDBManager(db_conn)
+    emp_alerts_df = emp_manage.get_alert_employees_table()
+    alert_phone_list = emp_manage.get_alert_phonenums(emp_alerts_df)
 
-    # -- Set thresholds for current Product SPECs
-    thresh = {'pH': [7.0, 8], 'DO': [40, 45]}
+    # -- Message Manager
+    sms_manager = TwilioMessageManager()
+    # -- Message Sender
+    sms_sender = TwilioMessageSender(sms_manager)
+    # -- Check thresholds for current Product SPECs
 
-    # -- Check Alerts to send (compare current trends with thresholds)
-    alertsender = Alerts('mp', '123', '423', 'manuf')
-    alertstosend = alertsender.check_alert_threshold(thresh)
+
+    # -- Update Alerts Trigger Status with Most Recent Data Capture
+    alert_sys = AlertSys()
+    alert_sys.set_alert_trigger_states()
+    # -- Get Updated Alerts Trigger Status
+    alerts_to_send = alert_sys.get_alert_toggle_status()
+
 
     # ---- Send Alert Messages
-    alertsender.set_alert_msg(alertstosend, 2402851931, 12345)
+    for key, items in alerts_to_send:
+        if items == 'On':
+            sms_sender.send_message(f"The Bioreactor {key} is reading {value} and is out of specification as of {Sys.Date()}. Please diagnose the issue or contact your manager.")
+            print(f"Alert Messages sent for the current {key} value.")
 

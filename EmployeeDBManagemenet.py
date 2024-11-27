@@ -1,34 +1,29 @@
 import pandas as pd
 from sqlalchemy import create_engine
-class Employee_Management:
+class EmployeeDBManager:
 
-    def __init__(self, userid, pwd, server, port):
-        self.userid = userid
-        self.pwd = pwd
-        self.server = server
-        self.port = port
-
+    def __init__(self, conn):
+        self.conn = conn
 
     # Gather Employees Dataframe for Alerts
-    def get_alert_employees(self):
-       # print(self.server)
-       # engine = create_engine(self.server)
-       #conn = engine.connect()
-       # query = 'SELECT * FROM  CMPNY.PRD.TABLE WHERE CMPNY.PRD.TABLE.DEPARTMENT = "manuf" AND CMPNY.PRD.TABLE.ALERT_TOGGLE = True'
-       # emp_alert_df = pd.read_sql_query(query, conn)
-        emp_alert_df = pd.read_csv('data/emp.csv')
+    def get_alert_employees_table(self):
+        # print(self.server)
+        conn = self.conn
+        query = 'SELECT * FROM  CMPNY.PRD.TABLE WHERE CMPNY.PRD.TABLE.ALERT_SUBSCRIPTIONS = True'
+        emp_alert_df = pd.read_sql_query(query, conn)
         return emp_alert_df
 
     ## Gather Phone Numbers of Employees Signed Up for Alerts
-    def get_alert_phonenums(self, employees):
+    def get_alert_phonenums(self, alert_employees):
         alerts_active_nums = []
-        self.employees = employees
-        for i in range(1, len(self.employees)):
-            if self.employees['department'][i] == 'manuf' and self.employees['alert_toggle'][i] == True:
-                alerts_active_nums.append(self.employees['phone'][i])
+        self.alert_employees = alert_employees
+        for i in range(1, len(self.alert_employees)):
+            if self.alert_employees['alert_toggle'][i] == True:
+                alerts_active_nums.append(self.alert_employees['phone'][i])
         return alerts_active_nums
 
     ## Set individual employee alert toggle
+    @classmethod
     def set_emp_alert_toggle(self, employee_id, toggle_status):
         update_toggle_query = '''
         UPDATE COMPANY.PRD.EMP A 
