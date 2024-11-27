@@ -56,7 +56,7 @@ Schedule the frequency at which the program checks current trneds.
 ### Prerequisites
 
 
-* Twilio Acct Token / Auth in main.py:
+* Set up DB connection
   ```sh
 		db_conn = engine.connect()
   ```
