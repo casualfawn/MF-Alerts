@@ -33,6 +33,12 @@ class TwilioMessageManager:
             client = Client(account_id, auth_token)
             return client
 
+        @classmethod
+        def set_twilio_phone(cls, twilio_phone_number):
+            self.twiliophone = twilio_phone_number
+            TwilioMessageManager.account_id = account_id
+            print("Twilio Phone has been updated.")
+
 
 class TwilioMessageSender(TwilioMessageManager):
 

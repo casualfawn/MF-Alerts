@@ -1,4 +1,4 @@
-import pandas as pd
+#import pandas as pd
 class AlertSys:
 
     def __init__(self):
@@ -17,17 +17,17 @@ class AlertSys:
         print('Current Monitored Measures and Threshold Ranges:')
         print(self.metric_thresholds)
 
-    def set_alert_msg(self, alertstosend, phone_from, phone_to):
-        self.alerttext = 'The {0} is {1} threshold you need to check it'
-        msglist = list()
+    def get_alerts_to_send(self, alertstosend):
+
         for i in range(len(alertstosend)):
             print(self.alerttext.format(alertstosend[i][0], alertstosend[i][1]))
-        return print('Alert Message Sent')
+
 
     @classmethod
     def add_new_metric_monitoring(cls, metric_name, threshold_low, threshold_high):
         #AlertSys.metric_categories += metric_name
-        AlertSys.metric_thresholds[metric_name] = [threshold_low, threshold_high]
+
+        AlertSys().metric_thresholds[metric_name] = [threshold_low, threshold_high]
 
     @ classmethod
     def set_alert_trigger_states(self, most_recent_captured_output):
@@ -38,3 +38,4 @@ class AlertSys:
                 AlertSys.alert_trigger_states[key] = 'On'
             else:
                 AlertSys.alert_trigger_states[key] = 'Off'
+
